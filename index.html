@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<!-- Created By CodingNepal -->
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <!-- <title>Sider Menu Bar CSS</title> -->
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/backvideo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+</head>
+<body>
+    <video autoplay muted loop id="myVideo">
+        <source src="img/test.mp4" type="video/mp4">
+    </video>
+    <input type="checkbox" id="check">
+    <label for="check">
+        <i class="fas fa-bars" id="btn"></i>
+        <i class="fas fa-times" id="cancel"></i>
+    </label>
+
+    <div class="sidebar">
+        <header id="Authorityuser">訪客</header>
+        <ul>
+            <li role="presentation" class="active" id="menuhome"><a href="#home" data-toggle="tab"><i class="fas fa-qrcode"></i>首頁</a></li>
+            <li role="presentation" id="menulogin"><a href="#login" data-toggle="tab"><i class="fas fa-qrcode"></i>登入</a></li>
+            <li role="presentation" id="menulogout"><a href="#home" onclick="logout()" data-toggle="tab"><i class="fas fa-qrcode"></i>登出</a></li>
+            <li role="presentation" id="menuinquire"><a href="#Inquire" data-toggle="tab"><i class="fas fa-qrcode"></i>查詢</a></li>
+            <li role="presentation" id="menuhandername"><a href="#Inquire_handername" data-toggle="tab"><i class="fas fa-qrcode"></i>查詢機況</a></li>
+            <li role="presentation" id="menuadd"><a href="#Add" data-toggle="tab"><i class="fas fa-qrcode"></i>註冊</a></li>
+            <li role="presentation" id="menuadd_Repair_Form"><a href="#Add_Repair_Form" data-toggle="tab"><i class="fas fa-qrcode"></i>新增修理單</a></li>
+            <li role="presentation" id="menuadd_P_Form"><a href="#Add_P_Form" data-toggle="tab"><i class="fas fa-qrcode"></i>新增回覆單</a></li>
+            <li role="presentation" id="menumodify"><a href="#modify" data-toggle="tab"><i class="fas fa-qrcode"></i>修改</a></li>
+            <li role="presentation" id="menudelete"><a href="#delete" data-toggle="tab"><i class="fas fa-qrcode"></i>刪除</a></li>
+
+            <li><button id="myBtn" onclick="myFunction()">Pause</button></li>
+        </ul>
+    </div>
+
+    <div class="tab-content content">
+        <div id="home" class="tab-pane">
+            首頁
+            <!--<form method="post" action="\img" enctype="multipart/form-data">
+                <input id="file1" name="file1" type="file" />
+                <button type="submit">
+                    <i class="glyphicon glyphicon-floppy-disk"></i>上傳
+                </button>
+            </form>-->
+        </div>
+        <!--/////////////////查詢/////////////-->
+
+        <div id="Inquire" class="tab-pane">
+            查詢人員
+            <div class="form-group">
+                <label for="chickID">工號</label>
+                <input id="chickID" />
+            </div>
+            <button type="button" class="btn btn-light" onclick="bInquire()">查詢</button>
+            <div id="Products"></div>
+        </div>
+
+        <!--/////////////////新增/////////////-->
+        <div id="Add" class="tab-pane">
+            <form>
+
+                個人資料<em>必填*</em>
+                <div class="div">
+                    <Label class="t1" for="account">姓名</Label>
+                    <input type="text" id="idName" name="account" placeholder="guest" autofocus autocomplete="off"
+                           onchange="cheakName();" required>
+                    <span id="name"></span><br />
+                    <p>1.不可空白2.至少2個字以上3.必須全為中文</p>
+                </div>
+
+                <div class="div">
+                    <Label class="t1" for="pwd">密碼</Label>
+                    <input type="password" id="idPassword" name="pwd" maxlength="12" autocomplete="off"
+                           onchange="checkPassword();" required>
+                    <span id="password"></span><br />
+                    <p>1.不可空白2.至少6個字以上且包含英數字、特殊字元[!@#$%^&*]</p>
+                </div>
+                <!--<div class="div">
+                <Label class="t1" for="pwd">日期</Label>
+                <input type="text" id="idDate" name="birthday" onchange="checkDate();">
+                <span id="date"></span><br />
+                <p>格式:西元年/月/日(yyyy/mm/dd)</p>
+            </div>-->
+                <div class="div">
+                    <Label class="t1" for="Id_card">身分證字號</Label>
+                    <input type="text" id="idId_card" name="Id_card" maxlength="10" autocomplete="off"
+                           onchange="" required>
+                    <span id="idId_card"></span><br />
+                    <p></p>
+                </div>
+
+                <div class="div">
+                    <Label class="t1" for="Phone">手機</Label>
+                    <input type="text" id="idPhone" name="Phone" maxlength="10" autocomplete="off"
+                           onchange="" required>
+                    <span id="idPhone"></span><br />
+                    <p></p>
+                </div>
+                <div class="div">
+                    <Label class="t1" for="email">信箱</Label>
+                    <input type="email" id="idemail" name="email" autocomplete="off"
+                           onchange="checkPassword();" required>
+                    <span id="idemail"></span><br />
+                    <p>1.不可空白2.並包含@</p>
+                </div>
+                <!--<div class="div">
+                    <Label class="t1" for="Department">部門</Label>
+                    <input type="text" id="idDepartment" name="Department" maxlength="3" autocomplete="off"
+                           onchange="" required>
+                    <span id="idDepartment"></span><br />
+                    <p></p>
+                </div>
+                <div class="div">
+                    <Label class="t1" for="Authority">權限</Label>
+                    <input type="text" id="idAuthority" name="Authority" maxlength="3" autocomplete="off"
+                           onchange="" required>
+                    <span id="idAuthority"></span><br />
+                    <p></p>
+                </div>-->
+                <div>
+                    <button type="button" class="btn btn-light" onclick="bAdd()">新增</button>
+                </div>
+
+
+
+
+
+            </form>
+
+        </div>
+
+        <!--/////////////////修改/////////////-->
+        <div id="modify" class="tab-pane">
+            修改資料
+            <div class="form-group">
+                <label for="modifyID">工號</label>
+                <input id="modifyID" />
+            </div>
+            <div class="form-group">
+                <label for="modifyname">姓名</label>
+                <input id="modifyname" />
+            </div>
+            <div class="form-group">
+                <label for="modifypassword">密碼</label>
+                <input id="modifypassword" />
+            </div>
+            <div class="form-group">
+                <label for="modifyId_card">身份證字號</label>
+                <input id="modifyId_card" />
+            </div>
+            <div class="form-group">
+                <label for="modifyphone">手機</label>
+                <input id="modifyphone" />
+            </div>
+            <div class="form-group">
+                <label for="modifyEmail">信箱</label>
+                <input id="modifyEmail" />
+            </div>
+            <div class="form-group">
+                <label for="modifyDepartment">部門</label>
+                <input id="modifyDepartment" />
+            </div>
+            <div class="form-group">
+                <label for="modifyAuthority">權限</label>
+                <!--<input id="modifyInstock" />-->
+                <select id="modifyAuthority">
+                    <option>權限修改</option>
+                    <option>作業員</option>
+                    <option>工程師</option>
+                    <option>管理員</option>
+                </select>
+            </div>
+
+            <button type="button" class="btn btn-light" onclick="bmodify()">修改</button>
+        </div>
+
+        <!--/////////////////刪除/////////////-->
+        <div id="delete" class="tab-pane">
+            刪除人員資料
+            <div class="form-group">
+                <label for="deleteTitle">Title</label>
+                <input id="deleteTitle" />
+            </div>
+            <button type="button" class="btn btn-light" onclick="bdelete()">刪除</button>
+        </div>
+
+        <!--/////////////////登入/////////////-->
+
+        <div id="login" class="tab-pane">
+            登入
+            <div class="form-group">
+                <label for="loginID">工號</label>
+                <input id="loginID" />
+                <label for="loginpassword">密碼</label>
+                <input id="loginpassword" />
+            </div>
+            <button type="button" class="btn btn-light" onclick="login()">登入</button>
+
+        </div>
+
+        <!--/////////////////查詢機況/////////////-->
+        <div id="Inquire_handername" class="tab-pane">
+            查詢機況
+
+            <button type="button" class="btn btn-light" onclick="Inquire_handername()">查詢機況</button>
+            <div id="Inquire_handername_listt"></div>
+        </div>
+        <!--/////////////////新增報修表單/////////////-->
+        <div id="Add_Repair_Form" class="tab-pane">
+            新增報修表單<em>必填*</em>
+            <div class="form-group">
+                <label for="Repair_Form_User_ID">工號*</label>
+                <input id="Repair_Form_User_ID" />
+            </div>
+            <div class="form-group">
+                <label for="Repair_Form_Codename">CODE*</label>
+                <input id="Repair_Form_Codename" />
+            </div>
+            <div class="form-group">
+                <label for="Repair_Form_Handername">機台號碼*</label>
+                <input id="Repair_Form_Handername" />
+            </div>
+            <div class="form-group">
+                <label for="Repair_Form_Rtext">備註</label>
+                <textarea cols="40" rows="5" id="Repair_Form_Rtext" name="Repair_Form_Rtext"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="Repair_Form_Rimg">附加檔案</label>
+                <input type="file" id="Repair_Form_Rimg" name="Repair_Form_Rimg" multiple="multiple">
+            </div>
+            <div class="form-group">
+                <label for="Repair_Form_Rstates">機台狀態*</label>
+                <input id="Repair_Form_Rstates" />
+            </div>
+            <button type="button" class="btn btn-light" onclick="Add_Repair_Form()">新增表單</button>
+
+        </div>
+
+        <!--/////////////////新增回覆表單//////////-->
+        <div id="Add_P_Form" class="tab-pane">
+            新增報修表單<em>必填*</em>
+            <div class="form-group">
+                <label for="P_Form_User_ID">工號*</label>
+                <input id="P_Form_User_ID" />
+            </div>
+            <div class="form-group">
+                <label for="P_Form_Codename">CODE*</label>
+                <input id="P_Form_Codename" />
+            </div>
+            <div class="form-group">
+                <label for="P_Form_Handername">機台號碼*</label>
+                <input id="P_Form_Handername" />
+            </div>
+            <div class="form-group">
+                <label for="P_Form_Ptext">備註</label>
+                <textarea cols="40" rows="5" id="P_Form_Ptext" name="P_Form_Ptext"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="P_Form_Rimg">附加檔案</label>
+                <input type="file" id="P_Form_Pimg" name="P_Form_Pimg" multiple="multiple">
+            </div>
+            <div class="form-group">
+                <label for="P_Form_Pstates">機台狀態*</label>
+                <input id="P_Form_Pstates" />
+            </div>
+            <button type="button" class="btn btn-light" onclick="Add_P_Form()">新增表單</button>
+
+        </div>
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--//////////////////////////////////////////////////////////////-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <section></section>
+    <script>
+        $("#menulogout").hide()
+        $("#menuinquire").hide()
+        $("#menuadd_Repair_Form").hide()
+        $("#menuadd_P_Form").hide()
+        $("#menumodify").hide()
+        $("#menudelete").hide()
+        
+
+        // Get the video
+        var video = document.getElementById("myVideo");
+
+        // Get the button
+        var btn = document.getElementById("myBtn");
+
+        // Pause and play the video, and change the button text
+        function myFunction() {
+            if (video.paused) {
+                video.play();
+                btn.innerHTML = "Pause";
+            } else {
+                video.pause();
+                btn.innerHTML = "Play";
+            }
+        }
+    </script>
+    <script>
+        document.getElementById("idName").onblur = cheakName;  //事件繫結，焦點離開
+        document.getElementById("idPassword").onblur = checkPassword;
+        /*        document.getElementById("idDate").onblur = checkDate;*/
+        //lock
+        var ok1
+        var ok2
+        var ok3
+        ///
+        function cheakName() {
+            //取得idPwd元素
+            let thePwdObj = document.getElementById("idName");//1.取元素
+            console.log(typeof thePwdObj);   //object
+            //取得idPwd元素值
+            let thePwdObjVal = thePwdObj.value;//2.抓值
+            console.log(typeof thePwdObjVal);  //string
+            console.log(thePwdObjVal);
+
+            //判斷元素值是否為空白，密碼長度是否大於6
+            //如果長度是否大於6，判斷是否包含字母、數字、特殊符號
+            let sp = document.getElementById("name");
+            let thePwdObjValLen = thePwdObjVal.length;//3.抓值長度
+            let flag1 = false, flag2 = false, flag3 = false;
+            var datalist = [];//宣告陣列
+            if (thePwdObjVal == "")
+                sp.innerHTML = "請輸入";
+            else if (thePwdObjValLen >= 2) {
+                // sp.innerHTML=">=";
+                console.log("字長:" + thePwdObjValLen);
+                for (let i = 0; i < thePwdObjValLen; i++) {
+
+                    let ch = thePwdObjVal.charAt(i);//4.用迴圈轉成單字
+                    /*datalist = datalist.pop(ch)*/
+                    console.log(datalist)
+                    flag1 = false;
+                    console.log("當前字為:" + ch);
+                    if ((ch >= "\u4E00" && ch <= "\u9FFF")) {//4E00 ～ 9FFF
+                        flag1 = true;
+                    }
+                    else {
+                        flag1 = false;
+
+                        break;
+                    }
+                }
+                if (flag1) {
+                    sp.innerHTML = "<span style='color: green';>" + "✔" + "正確</span>";
+                    ok1 = true;
+                }
+                else {
+                    sp.innerHTML = "<span style='color: red';>" + "❌" + "未依照格式</span>";
+                    ok1 = false;
+                }
+            }
+            else {
+                sp.innerHTML = "<span style='color: red';>" + "❌" + "未超過2個字</span>";
+                ok1 = false;
+            }
+
+
+
+        }
+        function checkPassword() {
+            //取得idPwd元素
+            let thePwdObj = document.getElementById("idPassword");
+            console.log(typeof thePwdObj);   //object
+            //取得idPwd元素值
+            let thePwdObjVal = thePwdObj.value;
+            console.log(typeof thePwdObjVal);  //string
+            console.log(thePwdObjVal);
+
+            //判斷元素值是否為空白，密碼長度是否大於6
+            //如果長度是否大於6，判斷是否包含字母、數字、特殊符號
+            let sp = document.getElementById("password");
+            let thePwdObjValLen = thePwdObjVal.length;
+            let flag1 = false, flag2 = false, flag3 = false, flag4 = false;
+            let j = 0;
+            if (thePwdObjVal == "")
+                sp.innerHTML = "請輸入";
+            else if (thePwdObjValLen >= 6) {
+                // sp.innerHTML=">=";
+                console.log("字長:" + thePwdObjValLen);
+                for (let i = 0; i < thePwdObjValLen; i++) {
+                    let ch = thePwdObjVal.charAt(i);
+                    flag1 = false;
+                    console.log("當前字為:" + ch);
+                    if ((ch >= "\u0000" && ch <= "\u4DFF")) {//0000 ～ 4DFF
+                        flag1 = true;
+                    }
+                    else {
+                        flag1 = false;
+
+                        break;
+                    }
+                    if (((ch >= "a" && ch <= "z") || (ch >= "A" && ch <= "Z")))//a ～ z &A ～ Z
+                        flag2 = true;
+                    if ((ch >= "0" && ch <= "9"))//0 ～ 9
+                        flag3 = true;
+                    if ((ch == "!" || ch == "@" || ch == "#" || ch == "$" || ch == "#" || ch == "^" || ch == "&" || ch == "*"))//!@#$%^&*
+                        flag4 = true;
+
+                }
+                if (flag1 && flag2 && flag3 && flag4) {
+                    sp.innerHTML = "<span style='color: green';>" + "✔" + "正確</span>";
+                    ok2 = true;
+                }
+                else {
+                    sp.innerHTML = "<span style='color: red';>" + "❌" + "未依照格式</span>";
+                    ok2 = false;
+                }
+            } else {
+                sp.innerHTML = "<span style='color: red';>" + "❌" + "未超過6個字</span>";
+                ok2 = false;
+            }
+        }
+
+        function checkDate() {
+            //取得idPwd元素
+            let thePwdObj = document.getElementById("idDate");
+            console.log(typeof thePwdObj);   //object
+            //取得idPwd元素值
+            let thePwdObjVal = thePwdObj.value;
+            console.log(typeof thePwdObjVal);  //string
+            console.log(thePwdObjVal);
+
+            //判斷元素值是否為空白，密碼長度是否大於6
+            //如果長度是否大於6，判斷是否包含字母、數字、特殊符號
+            let sp = document.getElementById("date");
+            let thePwdObjValLen = thePwdObjVal.length;
+            let flag1 = false, flag2 = false, flag3 = false;
+            let j = 0;
+            let yearname = "平年"
+            let dayLen = 28
+            if (thePwdObjVal == "")
+                sp.innerHTML = "請輸入";
+            else if (thePwdObjValLen == 10) {
+                // sp.innerHTML=">=";
+                console.log("字長:" + thePwdObjValLen);
+
+
+
+                /////////////////
+
+
+                let year = thePwdObjVal.substring(0, 4)
+                console.log(year + "年")
+                let month = thePwdObjVal.substring(5, 7)
+                console.log(month + "月")
+                let day = thePwdObjVal.substring(8, 10)
+                console.log(day + "日")
+
+
+                //閏年，2月份有29日 平年的2月份為28日。
+                if (year % 4 != 0) { //西元年份除以4不可整除，為平年
+                    yearname = "平年"
+                    dayLen = 28
+                    console.log(yearname)
+                }
+                else if ((year % 4 == 0) && (year % 100 != 0)) {//西元年份除以4可整除，且除以100不可整除，為閏年。
+                    yearname = "閏年"
+                    dayLen = 29
+                    console.log(yearname)
+                }
+                else if ((year % 100 == 0) && (year % 400 != 0)) {//西元年份除以100可整除，且除以400不可整除，為平年
+                    yearname = "平年"
+                    dayLen = 28
+                    console.log(yearname)
+                }
+                else if (year % 400 == 0) {//西元年份除以400可整除，為閏年。
+                    yearname = "閏年"
+                    dayLen = 29
+                    console.log(yearname)
+                }
+
+                ////////////////
+
+
+                for (let i = 0; i < thePwdObjValLen; i++) {
+                    let ch = thePwdObjVal.charAt(i);
+
+                    flag1 = false;
+                    console.log("當前字為:" + ch);
+                    if ((ch >= "\u0000" && ch <= "\u4DFF")) {//0000 ～ 4DFF
+                        flag1 = true;
+                    }
+                    if (day <= dayLen) {//判斷平年、閏年天數
+
+                        flag1 = true;
+                    }
+                    else {
+                        flag1 = false;
+
+                        break;
+                    }
+                }
+
+
+                //////////////////////
+                if (flag1) {
+                    sp.innerHTML = "<span style='color: green';>" + "✔" + "正確</span>";
+                    ok3 = true;
+                }
+                else {
+                    sp.innerHTML = "<span style='color: red';>" + "❌" + "未依照格式</span>";
+                    ok3 = false;
+                }
+            } else {
+                sp.innerHTML = "<span style='color: red';>" + "❌" + "未等於10個字</span>";
+                ok3 = false;
+            }
+
+        }
+
+        //===================================================查詢
+        function bInquire() {
+            /*$("#tableadd").hide()*/
+            /*            $("#modify").show()*/
+            $.ajax({
+                type: "get",
+                url: "http://localhost:3000/totaltable/",
+                data: {},
+                dataType: 'json',
+                async: false,//設定為同步操作就可以給全域性變數賦值成功
+                success: function (data) {
+                    /* usersname = data;*///usersname為前面宣告的全域性變數
+                    /*alert(Object.prototype.toString.call(data))*/
+
+                    for (i = 0; i < data.length; i++) {
+                        usersname += String(data[i]["id"]) + String(data[i]["Iname"])//取得陣列第0項 的字典key為 Iname
+                   /*     alert(usersname)*/
+                    }
+
+                }
+            });
+
+
+
+            $.ajax({
+                type: "get",
+                url: "http://localhost:3000/totaltable/" + $("#chickID").val(),
+            }).done(function (data) {
+                /*alert(data);*/
+                var str = "";
+                str += "<table class='table table-hover table-bordered'>";
+                str += "<thead>";
+                str += "<tr>";
+                str += "<td>姓名</td>";
+                str += "<td>密碼</td>";
+                str += "<td>身分證</td>";
+                str += "<td>電話</td>";
+                str += "<td>信箱</td>";
+                str += "<td>入值時間</td>";
+                str += "</tr>";
+                str += "</thead>";
+                str += "<tbody>";
+                $.each(data, function (index, data) {
+                    str += "<tr>";
+                    str += "<td>" + data.Iname + "</td>";
+                    str += "<td>" + data.Ipassword + "</td>";
+                    str += "<td>" + data.Id_card + "</td>";
+                    str += "<td>" + data.Cphone + "</td>";
+                    str += "<td>" + data.Email + "</td>";
+                    str += "<td>" + data.Idatetime + "</td>";
+                    str += "</tr>";                  
+                });
+                str += "</tbody>";
+                str += "</table>";
+                $("#Products").html(str);
+            })
+                .fail(function () {
+                    alert("error");
+                });
+
+
+
+
+            /*Nowtime.getFullYear() - 1911*/
+
+
+
+
+        }
+        //===================================================新增
+        function bAdd() {
+            var aaa
+            $.ajax({
+                type: "get",
+                url: "http://localhost:3000/totaltable/",
+                data: {},
+                dataType: 'json',
+                async: false,//設定為同步操作就可以給全域性變數賦值成功
+                success: function (data) {
+
+                    aaa = data.length
+                }
+            });
+
+            //Department: $("#idDepartment").val(),
+            //    Authority: $("#idAuthority").val()
+
+
+
+            var Nowtime = new Date()
+            /*Array(Nowtime.getFullYear())*/
+            if (ok1 && ok2) {
+                var productInsert = {
+                    id: parseInt(String(Nowtime.getFullYear() - 1911) + String(Nowtime.getMonth()) + String(Nowtime.getDate()) + aaa),
+                    Iname: $("#idName").val(),
+                    Ipassword: $("#idPassword").val(),
+                    Id_card: $("#idId_card").val(),
+                    Cphone: $("#idPhone").val(),
+                    Email: $("#idemail").val(),
+                    Department: 1,
+                    Authority: 1
+                }
+                $.ajax({
+                    type: "post",
+                    url: "http://localhost:3000/totaltable/",
+                    data: productInsert
+                }).done(function (data) {
+                    /*                    alert(data);*/
+                    alert("新增成功");
+                })
+            }
+            else {
+                alert("有資料沒填")
+            }
+        }
+        //===================================================修改
+        function bmodify() {
+            alert($("#modifyID").val())
+            var aaa = ""
+            var modifyIname = ""
+            var modifyIpassword = ""
+            var modifyId_card = ""
+            var modifyCphone = ""
+            var modifyEmail = ""
+            var modifyDepartment = ""
+            var modifyAuthority = ""
+            if ($("#modifyAuthority").val() == "管理員") {
+                aaa=3
+            }
+            if ($("#modifyAuthority").val() == "工程師") {
+                aaa = 2
+            }
+            if ($("#modifyAuthority").val() == "作業員") {
+                aaa = 1
+            }
+            $.ajax({
+                type: "get",
+                url: "http://localhost:3000/totaltable/" + $("#modifyID").val(),
+                data: {},
+                dataType: 'json',
+                async: false,//設定為同步操作就可以給全域性變數賦值成功
+                success: function (data) {
+                  modifyIname = String(data[0]["Iname"])
+                  modifyIpassword = String(data[0]["Ipassword"])
+                  modifyId_card = String(data[0]["Id_card"])
+                  modifyCphone = String(data[0]["Cphone"])
+                  modifyEmail = String(data[0]["Email"])
+                  modifyDepartment = String(data[0]["Department"])
+                  modifyAuthority = String(data[0]["Authority"])
+                }
+            });
+
+            //Iname: $("#modifyname").val(),
+            //    Ipassword: $("#modifypassword").val(),
+            //        Id_card: $("#modifyId_card").val(),
+            //            Cphone: $("#modifyphone").val(),
+            //                Email: $("#modifyEmail").val(),
+            //                    Department: $("#modifyDepartment").val(),
+            //                        Authority: aaa
+            if ($("#modifypassword").val()!="") {
+                modifyIpassword = $("#modifypassword").val()
+            }
+            if ($("#modifyId_card").val() != "") {
+                modifyId_card = $("#modifyId_card").val()
+            }
+            if ($("#modifyphone").val() != "") {
+                modifyCphone = $("#modifyphone").val()
+            }
+            if ($("#modifyEmail").val() != "") {
+                modifyEmail = $("#modifyEmail").val()
+            }
+            if ($("#modifyDepartment").val() != "") {
+                modifyDepartment = $("#modifyDepartment").val()
+            }
+            if ($("#modifyAuthority").val() != "") {
+                modifyAuthority = aaa
+            }
+
+
+
+            var productInsert2 = {
+                Iname: modifyIname,
+                Ipassword: modifyIpassword,
+                Id_card: modifyId_card,
+                Cphone: modifyCphone,
+                Email: modifyEmail,
+                Department: modifyDepartment,
+                Authority: modifyAuthority
+            }
+            $.ajax({
+                type: "patch",
+                url: "http://localhost:3000/totaltable/" + $("#modifyID").val(),
+                data: productInsert2,
+                dataType: 'json',
+                async: false,//設定為同步操作就可以給全域性變數賦值成功
+            }).done(function (data) {
+                alert(aaa);
+            })
+        }
+        //===================================================刪除
+        function bdelete() {
+
+            $.ajax({
+                type: "delete",
+                url: "http://localhost:3000/totaltable/" + $("#deleteTitle").val(),
+            }).done(function (data) {
+                alert("刪除成功");
+            })
+                .fail(function () {
+                    alert("error");
+                });
+        }
+
+
+
+
+
+
+
+
+
+
+        //===================================================登入
+        function login() {
+            /*alert("1")*/
+            var usersname = ""
+            var userpassword = ""
+            var authority = ""
+            $.ajax({
+                type: "get",
+                url: "http://localhost:3000/totaltable/" + $("#loginID").val(),
+                data: {},
+                dataType: 'json',
+                async: false,//設定為同步操作就可以給全域性變數賦值成功
+                success: function (data) {
+
+                    usersname = String(data[0]["Iname"])
+                    userpassword = String(data[0]["Ipassword"])//取得陣列第0項 的字典key為 Iname
+                    authority = String(data[0]["Authority"])
+                    alert(authority)
+
+
+                }
+            });
+            if (userpassword == $("#loginpassword").val()) {
+                alert("登入成功")
+                $("#Authorityuser").html("歡迎" + " " + usersname)
+                $("#menulogin").hide()
+                $("#menulogout").show()
+                if (authority == "1") {
+                    alert("作業員")
+                    $("#menuadd_Repair_Form").show()
+                }
+                if (authority == "2") {
+                    alert("工程師")
+                    $("#menuadd_P_Form").show()
+                }
+                if (authority == "3") {
+                    alert("管理員")
+                    $("#menumodify").show()
+                    $("#menudelete").show()
+                }
+
+            }
+
+        }
+
+
+        //===================================================登出
+        function logout() {
+
+            $("#Authorityuser").html("訪客")
+            $("#menulogin").show()
+            $("#menulogout").hide()
+            $("#menuinquire").hide()
+            $("#menuadd").hide()
+            $("#menuadd_Repair_Form").hide()
+            $("#menuadd_P_Form").hide()
+            $("#menumodify").hide()
+            $("#menudelete").hide()
+        }
+        /*+ $("#chickID").val()*/
+       //===================================================查詢機況
+        function Inquire_handername() {
+            $.ajax({
+                type: "get",
+                url: "http://localhost:3000/Handername_Form/",
+            }).done(function (data) {
+                /*alert(data);*/
+                var str = "";
+                str += "<table class='table table-hover table-bordered'>";
+                str += "<thead>";
+                str += "<tr>";
+                str += "<td>機台名稱</td>";
+                str += "<td>狀態</td>";
+                str += "</tr>";
+                str += "</thead>";
+                str += "<tbody>";
+                $.each(data, function (index, data) {
+
+                    str += "<tr>";
+                    str += "<td>" + data.Handername+ "</td>";
+                    str += "<td>" + data.state + "</td>";
+                    str += "</tr>";
+                });
+                str += "</tbody>";
+                str += "</table>";
+                $("#Inquire_handername_listt").html(str);
+            })
+                .fail(function () {
+                    alert("error");
+                });
+        }
+
+       //===================================================新增報修單
+        function Add_Repair_Form() {
+
+                var Add_Repair_Form = {
+                    User_ID: $("#Repair_Form_User_ID").val(),
+                    Codename: $("#Repair_Form_Codename").val(),
+                    Handername: $("#Repair_Form_Handername").val(),
+                    Rtext: $("#Repair_Form_Rtext").val(),
+                    Rimg: $("#Repair_Form_Rimg").val(),
+                    Rstates: $("#Repair_Form_Rstates").val()
+                }
+                $.ajax({
+                    type: "post",
+                    url: "http://localhost:3000/Repair_Form",
+                    data: Add_Repair_Form
+                }).done(function (data) {
+                    /*                    alert(data);*/
+                    alert("新增成功");
+                })
+                    .fail(function () {
+                        alert("error1");
+                    });
+
+
+            var productInsert3 = {
+                state: $("#Repair_Form_Rstates").val()
+            }
+            $.ajax({
+                type: "patch",
+                url: "http://localhost:3000/Handername_Form/" + $("#Repair_Form_Handername").val(),
+                data: productInsert3
+            }).done(function (data) {
+                alert(data);
+            })
+                .fail(function () {
+                    alert("error");
+                });
+
+        }
+
+
+
+
+       //===================================================新增回覆單
+        function Add_P_Form() {
+
+            var Add_P_Form = {
+                User_ID: $("#P_Form_User_ID").val(),
+                Codename: $("#P_Form_Codename").val(),
+                Handername: $("#P_Form_Handername").val(),
+                Ptext: $("#P_Form_Ptext").val(),
+                Pimg: $("#P_Form_Pimg").val(),
+                Pstates: $("#P_Form_Pstates").val()
+            }
+            $.ajax({
+                type: "post",
+                url: "http://localhost:3000/P_Form",
+                data: Add_P_Form
+            }).done(function (data) {
+                /*                    alert(data);*/
+                alert("新增成功");
+            })
+                .fail(function () {
+                    alert("error1");
+                });
+
+
+            var productInsert4 = {
+                state: $("#P_Form_Pstates").val()
+            }
+            $.ajax({
+                type: "patch",
+                url: "http://localhost:3000/Handername_Form/" + $("#P_Form_Handername").val(),
+                data: productInsert4
+            }).done(function (data) {
+                alert(data);
+            })
+                .fail(function () {
+                    alert("error");
+                });
+
+        }
+
+        
+
+
+
+
+
+    </script>
+
+
+
+</body>
+
+</html>

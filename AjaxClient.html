@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <ul class="nav nav-pills">
+        <li role="presentation" class="active"><a href="#Inquire" data-toggle="tab">查詢</a></li>
+        <li role="presentation"><a href="#Add" data-toggle="tab">新增</a></li>
+        <li role="presentation"><a href="#modify" data-toggle="tab">修改</a></li>
+        <li role="presentation"><a href="#delete" data-toggle="tab">刪除</a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="Inquire" class="tab-pane fade in active">
+            所有商品
+            <button onclick="bInquire()">查詢</button>
+            <div id="Products"></div>
+        </div>
+        <div id="Add" class="tab-pane fade">
+            <form>
+
+                <legend>個人資料<em>必填*</em></legend>
+                <div class="div">
+                    <Label class="t1" for="account">姓名</Label>
+                    <input type="text" id="idName" name="account" placeholder="guest" autofocus autocomplete="off"
+                           onchange="cheakName();" required>
+                    <span id="name"></span><br />
+                    <p>1.不可空白2.至少2個字以上3.必須全為中文</p>
+                </div>
+
+                <div class="div">
+                    <Label class="t1" for="pwd">密碼</Label>
+                    <input type="password" id="idPassword" name="pwd" maxlength="12" autocomplete="off"
+                           onchange="checkPassword();" required>
+                    <span id="password"></span><br />
+                    <p>1.不可空白2.至少6個字以上且包含英數字、特殊字元[!@#$%^&*]</p>
+                </div>
+                <div class="div">
+                    <Label class="t1" for="pwd">日期</Label>
+                    <input type="text" id="idDate" name="birthday" onchange="checkDate();">
+                    <span id="date"></span><br />
+                    <p>格式:西元年/月/日(yyyy/mm/dd)</p>
+                </div>
+                <div>
+                    <button onclick="bAdd()">111</button>
+                </div>
+
+
+
+
+            </form>
+
+        </div>
+        <div id="modify" class="tab-pane fade">
+            修改商品
+            <div class="form-group">
+                <label for="modifyTitle">Title</label>
+                <input id="modifyTitle" />
+            </div>
+            <div class="form-group">
+                <label for="modifyPrice">Price</label>
+                <input id="modifyPrice" />
+            </div>
+            <div class="form-group">
+                <label for="modifyInstock">Instock</label>
+                <input id="modifyInstock" />
+            </div>
+            <button onclick="bmodify()">修改</button>
+        </div>
+        <div id="delete" class="tab-pane fade">
+            刪除商品
+            <div class="form-group">
+                <label for="deleteTitle">Title</label>
+                <input id="deleteTitle" />
+            </div>
+            <button onclick="bdelete()">刪除</button>
+        </div>
+    </div>
+
+    
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script>
+//===================================================查詢
+        function bInquire() {
+            $.ajax({
+                type: "get",
+                url: "http://localhost:3000/api/Products",
+            }).done(function (data) {
+                /*alert(data);*/
+                var str = "";
+                str += "<table class='table table-striped table-hover table-bordered'>";
+                str += "<thead>";
+                str += "<tr>";
+                str += "<td>title</td>";
+                str += "<td>price</td>";
+                str += "<td>instock</td>";
+                str += "</tr>";
+                str += "</thead>";
+                str += "<tbody>";
+                $.each(data, function (index, data) {
+                    str += "<tr>";
+                    str += "<td>" + data.title + "</td>";
+                    str += "<td>" + data.price + "</td>";
+                    str += "<td>" + data.instock + "</td>";
+                    str += "</tr>";
+                });
+                str += "</tbody>";
+                str += "</table>";
+                $("#Products").html(str);
+            })
+                .fail(function () {
+                    alert("error");
+                });
+        }
+//===================================================新增
+        function bAdd() {
+            var productInsert = {
+                title: $("#insertTitle").val(),
+                price: $("#insertPrice").val(),
+                instock: $("#insertInstock").val()
+            }
+            $.ajax({
+                type: "post",
+                url: "http://localhost:3000/api/Products",
+                data: productInsert
+            }).done(function (data) {
+                alert("新增成功");
+            })
+                .fail(function () {
+                    alert("error");
+                });
+        }
+ //===================================================修改
+        function bmodify() {
+            var productInsert = {
+                title: $("#modifyTitle").val(),
+                price: $("#modifyPrice").val(),
+                instock: $("#modifyInstock").val()
+            }
+            $.ajax({
+                type: "put",
+                url: "http://localhost:3000/api/Products",
+                data: productInsert
+            }).done(function (data) {
+                alert("修改成功");
+            })
+                .fail(function () {
+                    alert("error");
+                });
+        }
+//===================================================刪除
+        function bdelete(){
+            
+            $.ajax({
+                type: "delete",
+                url: "http://localhost:3000/api/Products/" + $("#deleteTitle").val(),
+            }).done(function (data) {
+                alert("刪除成功");
+            })
+                .fail(function () {
+                    alert("error");
+                });
+        }
+//===================================================
+    </script>
+</body>
+</html>
