@@ -545,7 +545,7 @@
             /*            $("#modify").show()*/
             $.ajax({
                 type: "get",
-                url: "http://localhost:3000/totaltable/",
+                url: "http://118.167.26.68:3000/totaltable/",
                 data: {},
                 dataType: 'json',
                 async: false,//設定為同步操作就可以給全域性變數賦值成功
@@ -565,7 +565,7 @@
 
             $.ajax({
                 type: "get",
-                url: "http://localhost:3000/totaltable/" + $("#chickID").val(),
+                url: "http://118.167.26.68:3000/totaltable/" + $("#chickID").val(),
             }).done(function (data) {
                 /*alert(data);*/
                 var str = "";
@@ -613,7 +613,7 @@
             var aaa
             $.ajax({
                 type: "get",
-                url: "http://localhost:3000/totaltable/",
+                url: "http://118.167.26.68:3000/totaltable/",
                 data: {},
                 dataType: 'json',
                 async: false,//設定為同步操作就可以給全域性變數賦值成功
@@ -643,7 +643,7 @@
                 }
                 $.ajax({
                     type: "post",
-                    url: "http://localhost:3000/totaltable/",
+                    url: "http://118.167.26.68:3000/totaltable/",
                     data: productInsert
                 }).done(function (data) {
                     /*                    alert(data);*/
@@ -676,7 +676,7 @@
             }
             $.ajax({
                 type: "get",
-                url: "http://localhost:3000/totaltable/" + $("#modifyID").val(),
+                url: "http://118.167.26.68:3000/totaltable/" + $("#modifyID").val(),
                 data: {},
                 dataType: 'json',
                 async: false,//設定為同步操作就可以給全域性變數賦值成功
@@ -730,7 +730,7 @@
             }
             $.ajax({
                 type: "patch",
-                url: "http://localhost:3000/totaltable/" + $("#modifyID").val(),
+                url: "http://118.167.26.68:3000/totaltable/" + $("#modifyID").val(),
                 data: productInsert2,
                 dataType: 'json',
                 async: false,//設定為同步操作就可以給全域性變數賦值成功
@@ -743,7 +743,7 @@
 
             $.ajax({
                 type: "delete",
-                url: "http://localhost:3000/totaltable/" + $("#deleteTitle").val(),
+                url: "http://118.167.26.68:3000//totaltable/" + $("#deleteTitle").val(),
             }).done(function (data) {
                 alert("刪除成功");
             })
@@ -769,7 +769,7 @@
             var authority = ""
             $.ajax({
                 type: "get",
-                url: "http://localhost:3000/totaltable/" + $("#loginID").val(),
+                url: "http://118.167.26.68:3000/totaltable/" + $("#loginID").val(),
                 data: {},
                 dataType: 'json',
                 async: false,//設定為同步操作就可以給全域性變數賦值成功
@@ -825,7 +825,7 @@
         function Inquire_handername() {
             $.ajax({
                 type: "get",
-                url: "http://localhost:3000/Handername_Form/",
+                url: "http://118.167.26.68:3000/Handername_Form/",
             }).done(function (data) {
                 /*alert(data);*/
                 var str = "";
@@ -866,7 +866,7 @@
                 }
                 $.ajax({
                     type: "post",
-                    url: "http://localhost:3000/Repair_Form",
+                    url: "http://118.167.26.68:3000/Repair_Form",
                     data: Add_Repair_Form
                 }).done(function (data) {
                     /*                    alert(data);*/
@@ -882,7 +882,7 @@
             }
             $.ajax({
                 type: "patch",
-                url: "http://localhost:3000/Handername_Form/" + $("#Repair_Form_Handername").val(),
+                url: "http://118.167.26.68:3000/Handername_Form/" + $("#Repair_Form_Handername").val(),
                 data: productInsert3
             }).done(function (data) {
                 alert(data);
@@ -909,7 +909,7 @@
             }
             $.ajax({
                 type: "post",
-                url: "http://localhost:3000/P_Form",
+                url: "http://118.167.26.68:3000/P_Form",
                 data: Add_P_Form
             }).done(function (data) {
                 /*                    alert(data);*/
@@ -925,7 +925,7 @@
             }
             $.ajax({
                 type: "patch",
-                url: "http://localhost:3000/Handername_Form/" + $("#P_Form_Handername").val(),
+                url: "http://118.167.26.68:3000/Handername_Form/" + $("#P_Form_Handername").val(),
                 data: productInsert4
             }).done(function (data) {
                 alert(data);
